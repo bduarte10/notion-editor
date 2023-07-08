@@ -66,6 +66,18 @@ const Editor = () => {
               <span className='text-xs text-zinc-400'>Creat a simple bulleted list.</span>
             </div>
           </button>
+          {/* <button
+            className='flex items-center gap-2 p-1 rounded min-w-[280px] hover:bg-zinc-600'
+            onClick={() => editor.chain().focus().toggleCode().run()}
+          >
+            <img src="https://www.notion.so/images/blocks/code.a8b201f4.png" alt="Code block"
+              className='w-12 border border-zinc-600 rounded bg-zinc-50'
+            />
+            <div className='flex flex-col text-left'>
+              <span className='text-sm'>Code</span>
+              <span className='text-xs text-zinc-400'>Capture a code snippet.</span>
+            </div>
+          </button> */}
           <button
             className='flex items-center gap-2 p-1 rounded min-w-[280px] hover:bg-zinc-600'
             onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
