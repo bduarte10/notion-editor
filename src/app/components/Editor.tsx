@@ -56,6 +56,18 @@ const Editor = () => {
          
           <button
             className='flex items-center gap-2 p-1 rounded min-w-[280px] hover:bg-zinc-600'
+            onClick={() => editor.chain().focus().toggleBulletList().run()}
+          >
+            <img src="https://www.notion.so/images/blocks/bulleted-list.0e87e917.png" alt="bullet list"
+              className='w-12 border border-zinc-600 rounded bg-zinc-50'
+            />
+            <div className='flex flex-col text-left'>
+              <span className='text-sm'>Bulleted list</span>
+              <span className='text-xs text-zinc-400'>Creat a simple bulleted list.</span>
+            </div>
+          </button>
+          <button
+            className='flex items-center gap-2 p-1 rounded min-w-[280px] hover:bg-zinc-600'
             onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
           >
             <img src="https://www.notion.so/images/blocks/header.57a7576a.png" alt="heading"
