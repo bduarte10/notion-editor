@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { useEditor, EditorContent, BubbleMenu } from '@tiptap/react'
+import { useEditor, EditorContent, BubbleMenu, FloatingMenu } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { lowlight } from 'lowlight'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
@@ -44,35 +45,71 @@ const Editor = () => {
         className="max-w-[700px] max-h-[800px] overflow-y-auto mx-auto py-16 prose prose-invert prose-violet"
         editor={editor} />
       {editor && (
-        <BubbleMenu className='bg-zinc-700 shadow-xl border border-zinc-600 shadow-black/20 rounded-lg overflow-hidden flex divide-x divide-zinc-600' editor={editor} >
+        <FloatingMenu
+          className='bg-zinc-700 shadow-xl border border-zinc-600 shadow-black/20 rounded-lg overflow-hidden flex flex-col gap-1 py-2 px-1'
+          editor={editor}
+          shouldShow={({ state }) => {
+            const { $from } = state.selection
+            const currentLineText = $from.nodeBefore?.textContent
+            return currentLineText === '/'
+          }}>
          
-            <BubbleButton
-              onClick={() => editor.chain().focus().toggleBold().run()}
-              data-active={editor.isActive('bold')}
-            >
-              <RxFontBold size={16} />
-            </BubbleButton>
+          <button
+            className='flex items-center gap-2 p-1 rounded min-w-[280px] hover:bg-zinc-600'
+            onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+          >
+            <img src="https://www.notion.so/images/blocks/header.57a7576a.png" alt="heading"
+              className='w-12 border border-zinc-600 rounded'
+            />
+            <div className='flex flex-col text-left'>
+              <span className='text-sm'>Heading 1</span>
+              <span className='text-xs text-zinc-400'>Big section heading.</span>
+            </div>
+          </button>
+          <button
+            className='flex items-center gap-2 p-1 rounded min-w-[280px] hover:bg-zinc-600'
+            onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+          >
+            <img src="https://www.notion.so/images/blocks/subheader.9aab4769.png" alt="heading"
+              className='w-12 border border-zinc-600 rounded'
+            />
+            <div className='flex flex-col text-left'>
+              <span className='text-sm'>Heading 2</span>
+              <span className='text-xs text-zinc-400'>Medium section heading.</span>
+            </div>
+          </button>
+        </FloatingMenu>
+      )}
+      {editor && (
+        <BubbleMenu className='bg-zinc-700 shadow-xl border border-zinc-600 shadow-black/20 rounded-lg overflow-hidden flex divide-x divide-zinc-600' editor={editor} >
 
-            <BubbleButton
+          <BubbleButton
+            onClick={() => editor.chain().focus().toggleBold().run()}
+            data-active={editor.isActive('bold')}
+          >
+            <RxFontBold size={16} />
+          </BubbleButton>
+
+          <BubbleButton
             onClick={() => editor.chain().focus().toggleItalic().run()}
             data-active={editor.isActive('italic')}
-            >
-              <RxFontItalic size={16} />
-            </BubbleButton>
+          >
+            <RxFontItalic size={16} />
+          </BubbleButton>
 
-            <BubbleButton
+          <BubbleButton
             onClick={() => editor.chain().focus().toggleStrike().run()}
             data-active={editor.isActive('strike')}
-            >
-              <RxStrikethrough size={16} />
-            </BubbleButton>
+          >
+            <RxStrikethrough size={16} />
+          </BubbleButton>
 
-            <BubbleButton
+          <BubbleButton
             onClick={() => editor.chain().focus().toggleCode().run()}
-            data-active={editor.isActive('code') }
-            >
-              <RxCode size={16} />
-            </BubbleButton>
+            data-active={editor.isActive('code')}
+          >
+            <RxCode size={16} />
+          </BubbleButton>
 
         </BubbleMenu>
       )}
