@@ -14,7 +14,7 @@ import {
   RxFontItalic,
   RxStrikethrough,
   RxCode
- } from 'react-icons/rx'
+} from 'react-icons/rx'
 import BubbleButton from './BubbleButton'
 
 
@@ -45,22 +45,35 @@ const Editor = () => {
         editor={editor} />
       {editor && (
         <BubbleMenu className='bg-zinc-700 shadow-xl border border-zinc-600 shadow-black/20 rounded-lg overflow-hidden flex divide-x divide-zinc-600' editor={editor} >
-        <BubbleButton>
-          <RxFontBold size={16} />
-        </BubbleButton>
+         
+            <BubbleButton
+              onClick={() => editor.chain().focus().toggleBold().run()}
+              data-active={editor.isActive('bold')}
+            >
+              <RxFontBold size={16} />
+            </BubbleButton>
 
-        <BubbleButton>
-          <RxFontItalic size={16} />
-        </BubbleButton>
+            <BubbleButton
+            onClick={() => editor.chain().focus().toggleItalic().run()}
+            data-active={editor.isActive('italic')}
+            >
+              <RxFontItalic size={16} />
+            </BubbleButton>
 
-        <BubbleButton>
-          <RxStrikethrough size={16} />
-        </BubbleButton>
+            <BubbleButton
+            onClick={() => editor.chain().focus().toggleStrike().run()}
+            data-active={editor.isActive('strike')}
+            >
+              <RxStrikethrough size={16} />
+            </BubbleButton>
 
-        <BubbleButton>
-          <RxCode size={16} />
-        </BubbleButton>
-        
+            <BubbleButton
+            onClick={() => editor.chain().focus().toggleCode().run()}
+            data-active={editor.isActive('code') }
+            >
+              <RxCode size={16} />
+            </BubbleButton>
+
         </BubbleMenu>
       )}
     </>
