@@ -8,6 +8,7 @@ import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import js from 'highlight.js/lib/languages/javascript'
 import ts from 'highlight.js/lib/languages/typescript'
 import html from 'highlight.js/lib/languages/xml'
+import css from 'highlight.js/lib/languages/css'
 import { initialContent } from '../initialContent'
 import 'highlight.js/styles/tokyo-night-dark.css'
 import {
@@ -21,6 +22,7 @@ import BubbleButton from './BubbleButton'
 
 
 lowlight.registerLanguage('html', html)
+lowlight.registerLanguage('css', css)
 lowlight.registerLanguage('js', js)
 lowlight.registerLanguage('ts', ts)
 
@@ -66,18 +68,7 @@ const Editor = () => {
               <span className='text-xs text-zinc-400'>Creat a simple bulleted list.</span>
             </div>
           </button>
-          <button
-            className='flex items-center gap-2 p-1 rounded min-w-[280px] hover:bg-zinc-600'
-            onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-          >
-            <img src="https://www.notion.so/images/blocks/code.a8b201f4.png" alt="Code block"
-              className='w-12 border border-zinc-600 rounded bg-zinc-50'
-            />
-            <div className='flex flex-col text-left'>
-              <span className='text-sm'>Code</span>
-              <span className='text-xs text-zinc-400'>Capture a code snippet.</span>
-            </div>
-          </button>
+        
           <button
             className='flex items-center gap-2 p-1 rounded min-w-[280px] hover:bg-zinc-600'
             onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -100,6 +91,18 @@ const Editor = () => {
             <div className='flex flex-col text-left'>
               <span className='text-sm'>Heading 2</span>
               <span className='text-xs text-zinc-400'>Medium section heading.</span>
+            </div>
+          </button>
+          <button
+            className='flex items-center gap-2 p-1 rounded min-w-[280px] hover:bg-zinc-600'
+            onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+          >
+            <img src="https://www.notion.so/images/blocks/code.a8b201f4.png" alt="Code block"
+              className='w-12 border border-zinc-600 rounded bg-zinc-50'
+            />
+            <div className='flex flex-col text-left'>
+              <span className='text-sm'>Code</span>
+              <span className='text-xs text-zinc-400'>Capture a code snippet.</span>
             </div>
           </button>
         </FloatingMenu>
@@ -129,7 +132,7 @@ const Editor = () => {
           </BubbleButton>
 
           <BubbleButton
-            onClick={() => editor.chain().focus().toggleCode().run()}
+            onClick={() => editor.chain().focus().toggleCodeBlock().run()}
             data-active={editor.isActive('code')}
           >
             <RxCode size={16} />
